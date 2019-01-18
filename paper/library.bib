@@ -1,0 +1,1036 @@
+
+
+@techreport{Brown2010,
+  address =       {Washington, DC},
+  author =        {Brown, David L. and Messina, Paul},
+  institution =   {Office of Advanced Scientific Computing Research},
+  title =         {{Scientific Grand Challenges: Crosscutting
+                   Technologies for Computing at the Exascale}},
+  year =          {2010},
+}
+
+@article{Gropp2004,
+  author =        {Gropp, William and Lusk, Ewing},
+  journal =       {Int. J. High Perform. Comput. Appl.},
+  number =        {3},
+  pages =         {363--372},
+  title =         {{Fault tolerance in message passing interface
+                   programs}},
+  volume =        {18},
+  year =          {2004},
+  abstract =      {In this paper we examine the topic of writing
+                   fault-tolerant Message Passing Interface (MPI)
+                   applications. We discuss the meaning of fault
+                   tolerance in general and what the MPI Standard has to
+                   say about it. We survey several approaches to this
+                   problem, namely checkpointing, restructuring a class
+                   of standard MPI programs, modifying MPI semantics,
+                   and extending the MPI specification. We conclude
+                   that, within certain constraints, MPI can provide a
+                   useful context for writing application programs that
+                   exhibit significant degrees of fault tolerance.},
+  doi =           {10.1177/1094342004046045},
+  issn =          {10943420},
+}
+
+@article{Hoemmen2011,
+  author =        {Hoemmen, Mark and Heroux, MA A},
+  journal =       {Proc. 2011 Int. Conf. High Perform. Comput.
+                   Networking, Storage Anal.},
+  title =         {{Fault-tolerant iterative methods via selective
+                   reliability}},
+  year =          {2011},
+  abstract =      {Current iterative methods for solving linear
+                   equations as- sume reliability of data (no “bit
+                   flips”) and arithmetic (cor- rect up to rounding
+                   error). If faults occur, the solver usu- ally either
+                   aborts, or computes the wrong answer without
+                   indication. System reliability guarantees consume
+                   energy or reduces performance. As processor counts
+                   continue to grow, these costs will become unbearable.
+                   Instead, we show that if the system lets applications
+                   apply reliability selectively, we can develop
+                   iterations that compute the right answer de- spite
+                   faults. These “fault-tolerant” methods either
+                   converge eventually, at a rate that degrades
+                   gracefully with increased fault rate, or return a
+                   clear failure indication in the rare case that they
+                   cannot converge. If faults are infrequent, these al-
+                   gorithms spend most of their time in unreliable mode.
+                   This can save energy, improve performance, and avoid
+                   restarting from checkpoints. We illustrate
+                   convergence for a sample algorithm, Fault-Tolerant
+                   GMRES, for representative test problems and fault
+                   rates.},
+}
+
+@article{Teranishi2014,
+  author =        {Teranishi, Keita and Heroux, Michael A},
+  journal =       {Proc. 21st Eur. MPI Users' Gr. Meet. - EuroMPI/ASIA
+                   '14},
+  title =         {{Toward Local Failure Local Recovery Resilience Model
+                   using MPI-ULFM}},
+  year =          {2014},
+  abstract =      {The current system reaction to the loss of a single
+                   MPI pro-cess is to kill all the remaining processes
+                   and restart the application from the most recent
+                   checkpoint. This approach will become unfeasible for
+                   future extreme scale systems. We address this issue
+                   using an emerging resilient computing model called
+                   Local Failure Local Recovery (LFLR) that pro-vides
+                   application developers with the ability to recover
+                   lo-cally and continue application execution when a
+                   process is lost. We discuss the design of our
+                   software framework to enable the LFLR model using
+                   MPI-ULFM and demonstrate the resilient version of
+                   MiniFE that achieves a scalable re-covery from
+                   process failures.},
+  doi =           {10.1145/2642769.2642774},
+  isbn =          {9781450328753},
+}
+
+@article{Cappello2014,
+  author =        {Cappello, Franck and Geist, Al and Gropp, William and
+                   Kale, Sanjay and Kramer, Bill and Snir, Marc},
+  journal =       {Supercomput. Front. Innov.},
+  month =         {sep},
+  number =        {1},
+  title =         {{Toward Exascale Resilience: 2014 update}},
+  volume =        {1},
+  year =          {2014},
+  doi =           {10.14529/jsfi140101},
+  issn =          {23138734},
+  url =           {http://superfri.org/superfri/article/view/14},
+}
+
+@inproceedings{Gamell2015,
+  author =        {Gamell, M and Teranishi, K and Heroux, M A and
+                   Mayo, J and Kolla, H and Chen, J and Parashar, M},
+  booktitle =     {Proc. Int. Conf. High Perform. Comput. Networking,
+                   Storage Anal. - SC '15},
+  title =         {{Local recovery and failure masking for stencil-based
+                   applications at extreme scales}},
+  year =          {2015},
+  abstract =      {Application resilience is a key challenge that has to
+                   be ad-dressed to realize the exascale vision. Online
+                   recovery, even when it involves all processes, can
+                   dramatically reduce the overhead of failures as
+                   compared to the more traditional approach where the
+                   job is terminated and restarted from the last
+                   checkpoint. In this paper we explore how local
+                   recovery can be used for certain classes of
+                   applications to further reduce overheads due to
+                   resilience. Specifically we develop programming
+                   support and scalable runtime mech-anisms to enable
+                   online and transparent local recovery for
+                   stencil-based parallel applications on current
+                   leadership class systems. We also show how multiple
+                   independent failures can be masked to effectively
+                   reduce the impact on the to-tal time to solution. We
+                   integrate these mechanisms with the S3D combustion
+                   simulation, and experimentally demon-strate (using
+                   the Titan Cray-XK7 system at ORNL) the ability to
+                   tolerate high failure rates (i.e., node failures
+                   every 5 seconds) with low overhead while sustaining
+                   performance, at scales up to 262144 cores.},
+  doi =           {10.1145/2807591.2807672},
+  isbn =          {9781450337236},
+  issn =          {21674337 21674329},
+}
+
+@article{Grout2017,
+  author =        {Grout, Ray and Kolla, Hemanth and Minion, Michael and
+                   Bell, John},
+  journal =       {Commun. Appl. Math. Comput. Sci.},
+  month =         {may},
+  number =        {1},
+  pages =         {25--50},
+  title =         {{Achieving algorithmic resilience for temporal
+                   integration through spectral deferred corrections}},
+  volume =        {12},
+  year =          {2017},
+  doi =           {10.2140/camcos.2017.12.25},
+  issn =          {2157-5452},
+  url =           {http://msp.org/camcos/2017/12-1/p02.xhtml},
+}
+
+@article{Lee2015,
+  author =        {Lee, Seungjoon and Kevrekidis, Ioannis G. and
+                   Karniadakis, George Em},
+  journal =       {Fluid Dyn. Res.},
+  month =         {oct},
+  number =        {5},
+  pages =         {051402},
+  publisher =     {IOP Publishing},
+  title =         {{Resilient algorithms for reconstructing and
+                   simulating gappy flow fields in CFD}},
+  volume =        {47},
+  year =          {2015},
+  abstract =      {{\textcopyright} 2015 The Japan Society of Fluid
+                   Mechanics and IOP Publishing Ltd. It is anticipated
+                   that in future generations of massively parallel
+                   computer systems a significant portion of processors
+                   may suffer from hardware or software faults rendering
+                   large-scale computations useless. In this work we
+                   address this problem from the algorithmic side,
+                   proposing resilient algorithms that can recover from
+                   such faults irrespective of their fault origin. In
+                   particular, we set the foundations of a new class of
+                   algorithms that will combine numerical approximations
+                   with machine learning methods. To this end, we
+                   consider three types of fault scenarios: (1) a gappy
+                   region but with no previous gaps and no contamination
+                   of surrounding simulation data, (2) a space-time
+                   gappy region but with full spatiotemporal information
+                   and no contamination, and (3) previous gaps with
+                   contamination of surrounding data. To recover from
+                   such faults we employ different reconstruction and
+                   simulation methods, namely the projective
+                   integration, the co-Kriging interpolation, and the
+                   resimulation method. In order to compare the
+                   effectiveness of these methods for the different
+                   processor faults and to quantify the error
+                   propagation in each case, we perform simulations of
+                   two benchmark flows, flow in a cavity and flow past a
+                   circular cylinder. In general, the projective
+                   integration seems to be the most effective method
+                   when the time gaps are small, and the resimulation
+                   method is the best when the time gaps are big while
+                   the co-Kriging method is independent of time gaps.
+                   Furthermore, the projective integration method and
+                   the co-Kriging method are found to be good estimation
+                   methods for the initial and boundary conditions of
+                   the resimulation method in scenario (3).},
+  doi =           {10.1088/0169-5983/47/5/051402},
+  issn =          {0169-5983},
+  url =           {http://stacks.iop.org/1873-7005/47/i=5/a=051402?
+                   key=crossref.e7c216f251e24b00c0b43a2e7ff5ed6f},
+}
+
+@article{Everson1995,
+  author =        {Everson, R M and Sirovich, L},
+  journal =       {J. Opt. Soc. Am. A},
+  number =        {8},
+  pages =         {1657--1664},
+  title =         {{The Karhunen-Loeve transform for incomplete data}},
+  volume =        {12},
+  year =          {1995},
+  abstract =      {This paper addresses the problem of using
+                   the$\backslash$nKarhunen-Loeve transform with partial
+                   data. Given a$\backslash$nset of empirical
+                   eigenfunctions we show how to$\backslash$nrecover the
+                   modal coefficients for each
+                   gappy$\backslash$nsnapshot by a least-squares
+                   procedure. This method$\backslash$ngives an unbiased
+                   estimate of the data that lay in$\backslash$nthe gaps
+                   and permits gaps to be filled in
+                   a$\backslash$nreasonable manner. In addition, a
+                   scheme is$\backslash$nadvanced for finding empirical
+                   eigenfunctions from$\backslash$ngappy data. It is
+                   shown numerically that this$\backslash$nobtains
+                   spectra and eigenfunctions that are close
+                   to$\backslash$nthose obtained from unmarred data.},
+}
+
+@techreport{Tan2003,
+  author =        {Tan, Bui-Thanh and Willcox, Karen and
+                   Damodaran, Murali},
+  booktitle =     {AIAA Pap.},
+  number =        {2},
+  title =         {{Applications of Proper Orthogonal Decomposition for
+                   Inviscid Transonic Aerodynamics}},
+  volume =        {4231},
+  year =          {2003},
+  abstract =      {Two extensions to the proper orthogonal decomposition
+                   (POD) technique are considered for steady transonic
+                   aerodynamic applications. The first is to couple the
+                   POD approach with a cubic spline interpolation
+                   procedure in order to develop fast, low-order models
+                   that accurately capture the variation in parameters,
+                   such as the angle of attack or inflow Mach number.
+                   The second extension is a POD technique for the
+                   reconstruction of incomplete or inaccurate
+                   aerodynamic data. First, missing flow field data is
+                   constructed with an existing POD basis constructed
+                   from complete aerodynamic data. Second, a technique
+                   is used to develop a complete snapshots from an
+                   incomplete set of aerodynamic snapshots.},
+  url =           {http://dspace.mit.edu/bitstream/handle/1721.1/3694/
+                   HPCES002.pdf?sequence=2},
+}
+
+@article{Venturi2004,
+  author =        {Venturi, Daniele and Karniadakis, George EM},
+  journal =       {J. Fluid Mech.},
+  month =         {nov},
+  pages =         {315--336},
+  title =         {{Gappy data and reconstruction procedures for flow
+                   past a cylinder}},
+  volume =        {519},
+  year =          {2004},
+  abstract =      {We investigate the possibility of using proper
+                   orthogonal decomposition (POD) in reconstructing
+                   complete flow fields from gappy data. The incomplete
+                   fields are created from DNS snapshots of flow past a
+                   circular cylinder by randomly ommiting data points.
+                   We first examine the effectiveness of an existing
+                   method and subsequently introduce modifications that
+                   make the method robust and lead to the maximum
+                   possible resolution at a certain level of
+                   spatio-temporal gappiness. We simulate three levels
+                   of gappiness at approximately 20{\%}, 50{\%} and
+                   80{\%} in order to investigate the limits of
+                   applicability of the new procedure. We find that for
+                   the two lower levels of gappiness both the temporal
+                   and spatial POD modes can be recovered accurately
+                   leading to a very accurate representation of the
+                   velocity field. The resulting resolution is improved
+                   by more than five times compared to the existing
+                   method. However, for 80{\%} gappiness only a few
+                   temporal modes are captured accurately while the
+                   corresponding spatial modes are noisy. We explain
+                   this breakdown of the method in terms of a simple
+                   perturbation analysis. This new methodology can be a
+                   building block in an effort to develop effective data
+                   assimilation techniques in fluid mechanics
+                   applications.},
+  doi =           {10.1017/S0022112004001338},
+  isbn =          {0022-1120},
+  issn =          {0022-1120},
+  url =           {http://www.journals.cambridge.org/
+                   abstract{\_}S0022112004001338},
+}
+
+@article{Yates1933,
+  author =        {Yates, Frank},
+  journal =       {Emp. J. Exp. Agric.},
+  number =        {2},
+  pages =         {129--142},
+  title =         {{The analysis of replicated experiments when the
+                   field results are incomplete.}},
+  volume =        {1},
+  year =          {1933},
+}
+
+@book{Little2002,
+  author =        {Little, Roderick J a and Rubin, Donald B},
+  booktitle =     {Stat. Anal. with missing data},
+  pages =         {381},
+  title =         {{Statistical Analysis with Missing Data}},
+  year =          {2002},
+  abstract =      {Emphasizes the latest trends in the field. Includes a
+                   new chapter on evolving methods. Provides updated or
+                   revised material in most of the chapters.},
+  doi =           {10.2307/1533221},
+  isbn =          {0471183865},
+  issn =          {00324663},
+}
+
+@article{Gunes2006,
+  author =        {Gunes, Hasan and Sirisup, Sirod and
+                   Karniadakis, George Em},
+  journal =       {J. Comput. Phys.},
+  number =        {1},
+  pages =         {358--382},
+  title =         {{Gappy data: To Krig or not to Krig?}},
+  volume =        {212},
+  year =          {2006},
+  abstract =      {Data recovery and reconstruction methods for unsteady
+                   flow fields with spatio-temporal missing data are
+                   studied based on proper orthogonal decomposition
+                   (POD) and on Kriging interpolation. It is found that
+                   for sufficient temporal resolution, POD-based methods
+                   outperform Kriging interpolation. However, for
+                   insufficient temporal resolution, large spatial
+                   gappiness or for flow fields with black zones,
+                   Kriging interpolation is more effective. The
+                   comparison is performed based on randomly generated
+                   laminar and turbulent flow fields obtained from
+                   simulations of uniform flow past a circular cylinder.
+                   {\textcopyright} 2005 Elsevier Inc. All rights
+                   reserved.},
+  doi =           {10.1016/j.jcp.2005.06.023},
+  issn =          {00219991},
+}
+
+@article{Lee2017,
+  author =        {Lee, Seungjoon and Kevrekidis, Ioannis G. and
+                   Em, George and Karniadakis, George Em},
+  journal =       {J. Comput. Phys.},
+  month =         {oct},
+  pages =         {290--304},
+  publisher =     {Elsevier Inc.},
+  title =         {{A general CFD framework for fault-resilient
+                   simulations based on multi-resolution information
+                   fusion}},
+  volume =        {347},
+  year =          {2017},
+  abstract =      {We develop a general CFD framework for
+                   multi-resolution simulations to target multiscale
+                   problems but also resilience in exascale simulations,
+                   where faulty processors may lead to gappy, in
+                   space-time, simulated fields. We combine
+                   approximation theory and domain decomposition
+                   together with statistical learning techniques, e.g.
+                   coKriging, to estimate boundary conditions and
+                   minimize communications by performing independent
+                   parallel runs. To demonstrate this new simulation
+                   approach, we consider two benchmark problems. First,
+                   we solve the heat equation (a) on a small number of
+                   spatial “patches” distributed across the domain,
+                   simulated by finite differences at fine resolution
+                   and (b) on the entire domain simulated at very low
+                   resolution, thus fusing multi-resolution models to
+                   obtain the final answer. Second, we simulate the flow
+                   in a lid-driven cavity in an analogous fashion, by
+                   fusing finite difference solutions obtained with fine
+                   and low resolution assuming gappy data sets. We
+                   investigate the influence of various parameters for
+                   this framework, including the correlation kernel, the
+                   size of a buffer employed in estimating boundary
+                   conditions, the coarseness of the resolution of
+                   auxiliary data, and the communication frequency
+                   across different patches in fusing the information at
+                   different resolution levels. In addition to its
+                   robustness and resilience, the new framework can be
+                   employed to generalize previous multiscale approaches
+                   involving heterogeneous discretizations or even
+                   fundamentally different flow descriptions, e.g. in
+                   continuum-atomistic simulations.},
+  doi =           {10.1016/j.jcp.2017.06.044},
+  issn =          {00219991},
+  url =           {http://dx.doi.org/10.1016/j.jcp.2017.06.044 http://
+                   linkinghub.elsevier.com/retrieve/pii/S0021999117304989},
+}
+
+@article{Gear2003,
+  author =        {Gear, C.William and Li, Ju and Kevrekidis, Ioannis G},
+  journal =       {Phys. Lett. A},
+  month =         {sep},
+  number =        {3-4},
+  pages =         {190--195},
+  title =         {{The gap-tooth method in particle simulations}},
+  volume =        {316},
+  year =          {2003},
+  abstract =      {We explore the gap - tooth method for multiscale
+                   modeling of systems represented by microscopic
+                   physics-based simulators, when coarse-grained
+                   evolution equations are not available in closed form.
+                   A biased random walk particle simulation , motivated
+                   by the ...},
+  doi =           {10.1016/j.physleta.2003.07.004},
+  issn =          {03759601},
+  url =           {http://linkinghub.elsevier.com/retrieve/pii/
+                   S0375960103011502},
+}
+
+@article{Goodfellow2014,
+  author =        {Goodfellow, Ian and Pouget-Abadie, Jean and
+                   Mirza, Mehdi and Xu, Bing and Warde-Farley, David and
+                   Ozair, Sherjil and Courville, Aaron and
+                   Bengio, Yoshua},
+  journal =       {Adv. Neural Inf. Process. Syst. 27},
+  pages =         {2672--2680},
+  title =         {{Generative Adversarial Nets}},
+  year =          {2014},
+  abstract =      {We propose a new framework for estimating generative
+                   models via an adversar- ial process; in which we
+                   simultaneously train two models: a generative model G
+                   that captures the data distribution; and a
+                   discriminative model D that estimates the probability
+                   that a sample came from the training data rather
+                   thanG. The train- ing procedure for G is to maximize
+                   the probability of D making a mistake. This framework
+                   corresponds to a minimax two-player game. In the
+                   space of arbitrary functions G and D; a unique
+                   solution exists; with G recovering the training data
+                   distribution andD equal to 1 2 everywhere. In the
+                   case where G andD are defined by multilayer
+                   perceptrons; the entire system can be trained with
+                   backpropagation. There is no need for any Markov
+                   chains or unrolled approximate inference net- works
+                   during either training or generation of samples.
+                   Experiments demonstrate the potential of the
+                   framework through qualitative and quantitative
+                   evaluation of the generated samples. 1},
+  doi =           {10.1017/CBO9781139058452},
+  isbn =          {1406.2661},
+  issn =          {10495258},
+  url =           {http://papers.nips.cc/paper/5423-generative-adversarial-
+                   nets.pdf},
+}
+
+@inproceedings{Burger2012,
+  author =        {Burger, Harold C. and Schuler, Christian J. and
+                   Harmeling, Stefan},
+  booktitle =     {Proc. IEEE Comput. Soc. Conf. Comput. Vis. Pattern
+                   Recognit.},
+  pages =         {2392--2399},
+  title =         {{Image denoising: Can plain neural networks compete
+                   with BM3D?}},
+  year =          {2012},
+  abstract =      {Image denoising can be described as the problem of
+                   mapping from a noisy image to a noise-free image. The
+                   best currently available denoising methods
+                   approximate this mapping with cleverly engineered
+                   algorithms. In this work we attempt to learn this
+                   mapping directly with a plain multi layer perceptron
+                   (MLP) applied to image patches. While this has been
+                   done before, we will show that by training on large
+                   image databases we are able to compete with the
+                   current state-of-the-art image denoising methods.
+                   Furthermore, our approach is easily adapted to less
+                   extensively studied types of noise (by merely
+                   exchanging the training data), for which we achieve
+                   excellent results as well.},
+  doi =           {10.1109/CVPR.2012.6247952},
+  isbn =          {9781467312264},
+  issn =          {10636919},
+}
+
+@inproceedings{Dosovitskiy2015,
+  author =        {Dosovitskiy, Alexey and Springenberg, Jost Tobias and
+                   Brox, Thomas},
+  booktitle =     {Proc. IEEE Comput. Soc. Conf. Comput. Vis. Pattern
+                   Recognit.},
+  pages =         {1538--1546},
+  title =         {{Learning to generate chairs with convolutional
+                   neural networks}},
+  volume =        {07-12-June},
+  year =          {2015},
+  abstract =      {There are two widely known issues with prop- erly
+                   training Recurrent Neural Networks, the vanishing and
+                   the exploding gradient prob- lems detailed in Bengio
+                   et al. (1994). In this paper we attempt to improve
+                   the under- standing of the underlying issues by
+                   explor- ing these problems from an analytical, a geo-
+                   metric and a dynamical systems perspective. Our
+                   analysis is used to justify a simple yet ef- fective
+                   solution. We propose a gradient norm clipping
+                   strategy to deal with exploding gra- dients and a
+                   soft constraint for the vanishing gradients problem.
+                   We validate empirically our hypothesis and proposed
+                   solutions in the experimental section.},
+  doi =           {10.1109/CVPR.2015.7298761},
+  isbn =          {9781467369640},
+  issn =          {10636919},
+}
+
+@article{Lefkimmiatis2016,
+  author =        {Lefkimmiatis, Stamatios},
+  journal =       {Proc. IEEE Conf. Comput. Vis. Pattern Recognit.},
+  month =         {nov},
+  pages =         {5882--5891},
+  title =         {{Non-Local Color Image Denoising with Convolutional
+                   Neural Networks}},
+  year =          {2016},
+  abstract =      {We propose a novel deep network architecture for
+                   grayscale and color image denoising that is based on
+                   a non-local image model. Our motivation for the
+                   overall design of the proposed network stems from
+                   variational methods that exploit the inherent
+                   non-local self-similarity property of natural images.
+                   We build on this concept and introduce deep networks
+                   that perform non-local processing and at the same
+                   time they significantly benefit from discriminative
+                   learning. Experiments on the Berkeley segmentation
+                   dataset, comparing several state-of-the-art methods,
+                   show that the proposed non-local models achieve the
+                   best reported denoising performance both for
+                   grayscale and color images for all the tested noise
+                   levels. It is also worth noting that this increase in
+                   performance comes at no extra cost on the capacity of
+                   the network compared to existing alternative deep
+                   network architectures. In addition, we highlight a
+                   direct link of the proposed non-local models to
+                   convolutional neural networks. This connection is of
+                   significant importance since it allows our models to
+                   take full advantage of the latest advances on GPU
+                   computing in deep learning and makes them amenable to
+                   efficient implementations through their inherent
+                   parallelism.},
+  doi =           {10.1109/CVPR.2017.623},
+  url =           {http://arxiv.org/abs/1611.06757},
+}
+
+@article{Ledig2017,
+  author =        {Ledig, Christian and Theis, Lucas and Huszar, Ferenc and
+                   Caballero, Jose and Cunningham, Andrew and
+                   Acosta, Alejandro and Aitken, Andrew and
+                   Tejani, Alykhan and Totz, Johannes and Wang, Zehan and
+                   Shi, Wenzhe},
+  journal =       {Conf. Comput. Vis. Pattern Recognit.},
+  month =         {sep},
+  pages =         {1--14},
+  title =         {{Photo-Realistic Single Image Super-Resolution Using
+                   a Generative Adversarial Network}},
+  year =          {2016},
+  abstract =      {Despite the breakthroughs in accuracy and speed of
+                   single image super-resolution using faster and deeper
+                   convolutional neural networks, one central problem
+                   remains largely unsolved: how do we recover the finer
+                   texture details when we super-resolve at large
+                   upscaling factors? The behavior of optimization-based
+                   super-resolution methods is principally driven by the
+                   choice of the objective function. Recent work has
+                   largely focused on minimizing the mean squared
+                   reconstruction error. The resulting estimates have
+                   high peak signal-to-noise ratios, but they are often
+                   lacking high-frequency details and are perceptually
+                   unsatisfying in the sense that they fail to match the
+                   fidelity expected at the higher resolution. In this
+                   paper, we present SRGAN, a generative adversarial
+                   network (GAN) for image super-resolution (SR). To our
+                   knowledge, it is the first framework capable of
+                   inferring photo-realistic natural images for 4x
+                   upscaling factors. To achieve this, we propose a
+                   perceptual loss function which consists of an
+                   adversarial loss and a content loss. The adversarial
+                   loss pushes our solution to the natural image
+                   manifold using a discriminator network that is
+                   trained to differentiate between the super-resolved
+                   images and original photo-realistic images. In
+                   addition, we use a content loss motivated by
+                   perceptual similarity instead of similarity in pixel
+                   space. Our deep residual network is able to recover
+                   photo-realistic textures from heavily downsampled
+                   images on public benchmarks. An extensive
+                   mean-opinion-score (MOS) test shows hugely
+                   significant gains in perceptual quality using SRGAN.
+                   The MOS scores obtained with SRGAN are closer to
+                   those of the original high-resolution images than to
+                   those obtained with any state-of-the-art method.},
+  doi =           {10.1109/CVPR.2017.19},
+  isbn =          {978-1-5386-0457-1},
+  issn =          {0018-5043},
+  url =           {http://arxiv.org/abs/1609.04802},
+}
+
+@inproceedings{Tai2017,
+  author =        {Tai, Ying and Yang, Jian and Liu, Xiaoming},
+  booktitle =     {Proc. - 30th IEEE Conf. Comput. Vis. Pattern
+                   Recognition, CVPR 2017},
+  pages =         {2790--2798},
+  title =         {{Image super-resolution via deep recursive residual
+                   network}},
+  volume =        {2017-Janua},
+  year =          {2017},
+  abstract =      {Recently, Convolutional Neural Network (CNN) based
+                   models have achieved great success in Single Image
+                   Super-Resolution (SISR). Owing to the strength of
+                   deep networks, these CNN models learn an effective
+                   nonlinear mapping from the low-resolution input image
+                   to the high-resolution target image, at the cost of
+                   requiring enormous parameters. This paper proposes a
+                   very deep CNN model (up to 52 con-volutional layers)
+                   named Deep Recursive Residual Network (DRRN) that
+                   strives for deep yet concise networks. Specifi-cally,
+                   residual learning is adopted, both in global and
+                   local manners, to mitigate the difficulty of training
+                   very deep net-works; recursive learning is used to
+                   control the model pa-rameters while increasing the
+                   depth. Extensive benchmark evaluation shows that DRRN
+                   significantly outperforms state of the art in SISR,
+                   while utilizing far fewer parameters. Code is
+                   available at https://github.com/tyshiwo /DRRN
+                   CVPR17.},
+  doi =           {10.1109/CVPR.2017.298},
+  isbn =          {9781538604571},
+}
+
+@inproceedings{Lai2017,
+  author =        {Lai, Wei Sheng and Huang, Jia Bin and Ahuja, Narendra and
+                   Yang, Ming Hsuan},
+  booktitle =     {Proc. - 30th IEEE Conf. Comput. Vis. Pattern
+                   Recognition, CVPR 2017},
+  pages =         {5835--5843},
+  title =         {{Deep laplacian pyramid networks for fast and
+                   accurate super-resolution}},
+  volume =        {2017-Janua},
+  year =          {2017},
+  abstract =      {Convolutional neural networks have recently
+                   demonstrated high-quality reconstruction for single
+                   image super-resolution. However, existing methods
+                   often require a large number of network parameters
+                   and entail heavy computational loads at runtime for
+                   generating high-accuracy super-resolution results. In
+                   this paper, we propose the deep Laplacian Pyramid
+                   Super-Resolution Network for fast and accurate image
+                   super-resolution. The proposed network progressively
+                   reconstructs the sub-band residuals of
+                   high-resolution images at multiple pyramid levels. In
+                   contrast to existing methods that involve the bicubic
+                   interpolation for pre-processing (which results in
+                   large feature maps), the proposed method directly
+                   extracts features from the low-resolution input space
+                   and thereby entails low computational loads. We train
+                   the proposed network with deep supervision using the
+                   robust Charbonnier loss functions and achieve
+                   high-quality image reconstruction. Furthermore, we
+                   utilize the recursive layers to share parameters
+                   across as well as within pyramid levels, and thus
+                   drastically reduce the number of parameters.
+                   Extensive quantitative and qualitative evaluations on
+                   benchmark datasets show that the proposed algorithm
+                   performs favorably against the state-of-the-art
+                   methods in terms of run-time and image quality.},
+  doi =           {10.1109/CVPR.2017.618},
+  isbn =          {9781538604571},
+  issn =          {1063-6919},
+}
+
+@article{Yeh2016,
+  author =        {Yeh, Raymond A. and Chen, Chen and Lim, Teck Yian and
+                   Schwing, Alexander G. and Hasegawa-Johnson, Mark and
+                   Do, Minh N.},
+  journal =       {ACM Trans. Graph.},
+  month =         {jul},
+  number =        {4},
+  pages =         {1--14},
+  title =         {{Semantic Image Inpainting with Deep Generative
+                   Models}},
+  volume =        {36},
+  year =          {2016},
+  abstract =      {Semantic image inpainting is a challenging task where
+                   large missing regions have to be filled based on the
+                   available visual data. Existing methods which extract
+                   information from only a single image generally
+                   produce unsatisfactory results due to the lack of
+                   high level context. In this paper, we propose a novel
+                   method for semantic image inpainting, which generates
+                   the missing content by conditioning on the available
+                   data. Given a trained generative model, we search for
+                   the closest encoding of the corrupted image in the
+                   latent image manifold using our context and prior
+                   losses. This encoding is then passed through the
+                   generative model to infer the missing content. In our
+                   method, inference is possible irrespective of how the
+                   missing content is structured, while the
+                   state-of-the-art learning based method requires
+                   specific information about the holes in the training
+                   phase. Experiments on three datasets show that our
+                   method successfully predicts information in large
+                   missing regions and achieves pixel-level
+                   photorealism, significantly outperforming the
+                   state-of-the-art methods.},
+  doi =           {10.1145/3072959.3073659},
+  issn =          {07300301},
+  url =           {http://dl.acm.org/citation.cfm?doid=3072959.3073659 http://
+                   arxiv.org/abs/1607.07539},
+}
+
+@article{Denton2016,
+  author =        {Denton, Emily and Gross, Sam and Fergus, Rob},
+  month =         {nov},
+  pages =         {1--10},
+  title =         {{Semi-Supervised Learning with Context-Conditional
+                   Generative Adversarial Networks}},
+  year =          {2016},
+  abstract =      {We introduce a simple semi-supervised learning
+                   approach for images based on in-painting using an
+                   adversarial loss. Images with random patches removed
+                   are presented to a generator whose task is to fill in
+                   the hole, based on the surrounding pixels. The
+                   in-painted images are then presented to a
+                   discriminator network that judges if they are real
+                   (unaltered training images) or not. This task acts as
+                   a regularizer for standard supervised training of the
+                   discriminator. Using our approach we are able to
+                   directly train large VGG-style networks in a
+                   semi-supervised fashion. We evaluate on STL-10 and
+                   PASCAL datasets, where our approach obtains
+                   performance comparable or superior to existing
+                   methods.},
+  issn =          {1611.06430},
+  url =           {http://arxiv.org/abs/1611.06430},
+}
+
+@inproceedings{Pathak2016,
+  author =        {Pathak, Deepak and Krahenbuhl, Philipp and
+                   Donahue, Jeff and Darrell, Trevor and
+                   Efros, Alexei A.},
+  booktitle =     {2016 IEEE Conf. Comput. Vis. Pattern Recognit.},
+  month =         {jun},
+  pages =         {2536--2544},
+  publisher =     {IEEE},
+  title =         {{Context Encoders: Feature Learning by Inpainting}},
+  year =          {2016},
+  abstract =      {We present an unsupervised visual feature learning
+                   algorithm driven by context-based pixel prediction.
+                   By analogy with auto-encoders, we propose Context
+                   Encoders -- a convolutional neural network trained to
+                   generate the contents of an arbitrary image region
+                   conditioned on its surroundings. In order to succeed
+                   at this task, context encoders need to both
+                   understand the content of the entire image, as well
+                   as produce a plausible hypothesis for the missing
+                   part(s). When training context encoders, we have
+                   experimented with both a standard pixel-wise
+                   reconstruction loss, as well as a reconstruction plus
+                   an adversarial loss. The latter produces much sharper
+                   results because it can better handle multiple modes
+                   in the output. We found that a context encoder learns
+                   a representation that captures not just appearance
+                   but also the semantics of visual structures. We
+                   quantitatively demonstrate the effectiveness of our
+                   learned features for CNN pre-training on
+                   classification, detection, and segmentation tasks.
+                   Furthermore, context encoders can be used for
+                   semantic inpainting tasks, either stand-alone or as
+                   initialization for non-parametric methods.},
+  doi =           {10.1109/CVPR.2016.278},
+  isbn =          {978-1-4673-8851-1},
+  issn =          {10636919},
+  url =           {http://arxiv.org/abs/1604.07379 http://ieeexplore.ieee.org/
+                   document/7780647/},
+}
+
+@inproceedings{Li2017a,
+  author =        {Li, Yijun and Liu, Sifei and Yang, Jimei and
+                   Yang, Ming-hsuan},
+  booktitle =     {2017 IEEE Conf. Comput. Vis. Pattern Recognit.},
+  month =         {jul},
+  pages =         {5892--5900},
+  publisher =     {IEEE},
+  title =         {{Generative Face Completion}},
+  year =          {2017},
+  abstract =      {In this paper, we propose an effective face
+                   completion algorithm using a deep generative model.
+                   Different from well-studied background completion,
+                   the face completion task is more challenging as it
+                   often requires to generate semantically new pixels
+                   for the missing key components (e.g., eyes and
+                   mouths) that contain large appearance variations.
+                   Unlike existing nonparametric algorithms that search
+                   for patches to synthesize, our algorithm directly
+                   generates contents for missing regions based on a
+                   neural network. The model is trained with a
+                   combination of a reconstruction loss, two adversarial
+                   losses and a semantic parsing loss, which ensures
+                   pixel faithfulness and local-global contents
+                   consistency. With extensive experimental results, we
+                   demonstrate qualitatively and quantitatively that our
+                   model is able to deal with a large area of missing
+                   pixels in arbitrary shapes and generate realistic
+                   face completion results.},
+  doi =           {10.1109/CVPR.2017.624},
+  isbn =          {978-1-5386-0457-1},
+  url =           {http://arxiv.org/abs/1704.05838 http://ieeexplore.ieee.org/
+                   document/8100107/},
+}
+
+@inproceedings{Sasaki2017,
+  author =        {Sasaki, Kazuma and Iizuka, Satoshi and
+                   Simo-Serra, Edgar and Ishikawa, Hiroshi},
+  booktitle =     {Proc. - 30th IEEE Conf. Comput. Vis. Pattern
+                   Recognition, CVPR 2017},
+  title =         {{Joint gap detection and inpainting of line
+                   drawings}},
+  year =          {2017},
+  abstract =      {We propose a novel data-driven approach for
+                   automati-cally detecting and completing gaps in line
+                   drawings with a Convolutional Neural Network. In the
+                   case of existing inpainting approaches for natural
+                   images, masks indicating the missing regions are
+                   generally required as input. Here, we show that line
+                   drawings have enough structures that can be learned
+                   by the CNN to allow automatic detection and
+                   com-pletion of the gaps without any such input. Thus,
+                   our method can find the gaps in line drawings and
+                   complete them without user interaction. Furthermore,
+                   the completion realistically conserves thickness and
+                   curvature of the line segments. All the necessary
+                   heuristics for such realistic line completion are
+                   learned naturally from a dataset of line drawings,
+                   where various patterns of line completion are
+                   generated on the fly as training pairs to improve the
+                   model generalization. We evaluate our method
+                   qualitatively on a diverse set of chal-lenging line
+                   drawings and also provide quantitative results with a
+                   user study, where it significantly outperforms the
+                   state of the art.},
+  doi =           {10.1109/CVPR.2017.611},
+  isbn =          {9781538604571},
+}
+
+@article{Ulyanov2017,
+  author =        {Ulyanov, Dmitry and Vedaldi, Andrea and
+                   Lempitsky, Victor},
+  month =         {nov},
+  title =         {{Deep Image Prior}},
+  year =          {2017},
+  abstract =      {Deep convolutional networks have become a popular
+                   tool for image generation and restoration. Generally,
+                   their excellent performance is imputed to their
+                   ability to learn realistic image priors from a large
+                   number of example images. In this paper, we show
+                   that, on the contrary, the structure of a generator
+                   network is sufficient to capture a great deal of
+                   low-level image statistics prior to any learning. In
+                   order to do so, we show that a randomly-initialized
+                   neural network can be used as a handcrafted prior
+                   with excellent results in standard inverse problems
+                   such as denoising, super-resolution, and inpainting.
+                   Furthermore, the same prior can be used to invert
+                   deep neural representations to diagnose them, and to
+                   restore images based on flash-no flash input pairs.
+                   Apart from its diverse applications, our approach
+                   highlights the inductive bias captured by standard
+                   generator network architectures. It also bridges the
+                   gap between two very popular families of image
+                   restoration methods: learning-based methods using
+                   deep convolutional networks and learning-free methods
+                   based on handcrafted image priors such as
+                   self-similarity. Code and supplementary material are
+                   available at
+                       https://dmitryulyanov.github.io/deep{\_}image{\_}prior
+  .},
+  url =           {http://arxiv.org/abs/1711.10925},
+}
+
+@article{Raissi2017,
+  author =        {Raissi, Maziar and Perdikaris, Paris and
+                   Karniadakis, George Em},
+  number =        {Part II},
+  pages =         {1--19},
+  title =         {{Physics Informed Deep Learning (Part II):
+                   Data-driven Discovery of Nonlinear Partial
+                   Differential Equations}},
+  year =          {2017},
+  abstract =      {We introduce physics informed neural networks --
+                   neural networks that are trained to solve supervised
+                   learning tasks while respecting any given law of
+                   physics described by general nonlinear partial
+                   differential equations. In this second part of our
+                   two-part treatise, we focus on the problem of
+                   data-driven discovery of partial differential
+                   equations. Depending on whether the available data is
+                   scattered in space-time or arranged in fixed temporal
+                   snapshots, we introduce two main classes of
+                   algorithms, namely continuous time and discrete time
+                   models. The effectiveness of our approach is
+                   demonstrated using a wide range of benchmark problems
+                   in mathematical physics, including conservation laws,
+                   incompressible fluid flow, and the propagation of
+                   nonlinear shallow-water waves.},
+  url =           {http://arxiv.org/abs/1711.10566},
+}
+
+@article{Sirignano2018,
+  author =        {Sirignano, Justin and Spiliopoulos, Konstantinos},
+  journal =       {J. Comput. Phys.},
+  month =         {dec},
+  pages =         {1339--1364},
+  title =         {{DGM: A deep learning algorithm for solving partial
+                   differential equations}},
+  volume =        {375},
+  year =          {2018},
+  doi =           {10.1016/j.jcp.2018.08.029},
+  issn =          {00219991},
+  url =           {https://linkinghub.elsevier.com/retrieve/pii/
+                   S0021999118305527},
+}
+
+@inproceedings{He2015,
+  author =        {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and
+                   Sun, Jian},
+  booktitle =     {Proc. IEEE Int. Conf. Comput. Vis.},
+  pages =         {1026--1034},
+  title =         {{Delving deep into rectifiers: Surpassing human-level
+                   performance on imagenet classification}},
+  volume =        {2015 Inter},
+  year =          {2015},
+  abstract =      {Rectified activation units (rectifiers) are essential
+                   for state-of-the-art neural networks. In this work,
+                   we study rectifier neural networks for image
+                   classification from two aspects. First, we propose a
+                   Parametric Rectified Linear Unit (PReLU) that
+                   generalizes the traditional rectified unit. PReLU
+                   improves model fitting with nearly zero extra
+                   computational cost and little overfitting risk.
+                   Second, we derive a robust initialization method that
+                   particularly considers the rectifier nonlinearities.
+                   This method enables us to train extremely deep
+                   rectified models directly from scratch and to
+                   investigate deeper or wider network architectures.
+                   Based on our PReLU networks (PReLU-nets), we achieve
+                   4.94{\%} top-5 test error on the ImageNet 2012
+                   classification dataset. This is a 26{\%} relative
+                   improvement over the ILSVRC 2014 winner (GoogLeNet,
+                   6.66{\%}). To our knowledge, our result is the first
+                   to surpass human-level performance (5.1{\%},
+                   Russakovsky et al.) on this visual recognition
+                   challenge.},
+  doi =           {10.1109/ICCV.2015.123},
+  isbn =          {9781467383912},
+  issn =          {15505499},
+}
+
+@article{Kingma2014,
+  author =        {Kingma, Diederik P. and Ba, Jimmy},
+  month =         {dec},
+  title =         {{Adam: A Method for Stochastic Optimization}},
+  year =          {2014},
+  abstract =      {We introduce Adam, an algorithm for first-order
+                   gradient-based optimization of stochastic objective
+                   functions, based on adaptive estimates of lower-order
+                   moments. The method is straightforward to implement,
+                   is computationally efficient, has little memory
+                   requirements, is invariant to diagonal rescaling of
+                   the gradients, and is well suited for problems that
+                   are large in terms of data and/or parameters. The
+                   method is also appropriate for non-stationary
+                   objectives and problems with very noisy and/or sparse
+                   gradients. The hyper-parameters have intuitive
+                   interpretations and typically require little tuning.
+                   Some connections to related algorithms, on which Adam
+                   was inspired, are discussed. We also analyze the
+                   theoretical convergence properties of the algorithm
+                   and provide a regret bound on the convergence rate
+                   that is comparable to the best known results under
+                   the online convex optimization framework. Empirical
+                   results demonstrate that Adam works well in practice
+                   and compares favorably to other stochastic
+                   optimization methods. Finally, we discuss AdaMax, a
+                   variant of Adam based on the infinity norm.},
+  url =           {http://arxiv.org/abs/1412.6980},
+}
+
+@inproceedings{Paszke2017,
+  author =        {Paszke, Adam and Gross, Sam and Chintala, Soumith and
+                   Chanan, Gregory and Yang, Edward and DeVito, Zachary and
+                   Lin, Zeming and Desmaison, Alban and Antiga, Luca and
+                   Lerer, Adam},
+  booktitle =     {NIPS-W},
+  title =         {{Automatic differentiation in PyTorch}},
+  year =          {2017},
+}
+
+@article{Pedregosa2011,
+  author =        {Pedregosa, F. and Varoquaux, G. and Gramfort, A. and
+                   Michel, V. and Thirion, B. and Grisel, O. and
+                   Blondel, M. and Prettenhofer, P. and Weiss, R. and
+                   Dubourg, V. and Vanderplas, J. and Passos, A. and
+                   Cournapeau, D. and Brucher, M. and Perrot, M. and
+                   Duchesnay, E.},
+  journal =       {J. Mach. Learn. Res.},
+  title =         {{Scikit-learn: Machine Learning in Python}},
+  year =          {2011},
+  abstract =      {Cet ouvrage retranscrit cinq entretiens,
+                   diffus{\'{e}}s en 1988 sur France Culture entre
+                   l'historien Roger Chartier et le sociologue Pierre
+                   Bourdieu dont la pens{\'{e}}e, moins largement
+                   diffus{\'{e}}e qu'aujourd'hui, {\'{e}}tait
+                   d{\'{e}}j{\`{a}} l'objet de r{\'{e}}actions hostiles
+                   ou d'interpr{\'{e}}tations r{\'{e}}ductrices. Chaque
+                   entretien permit {\`{a}} Bourdieu de d{\'{e}}velopper
+                   en direction d'un public {\'{e}}largi ses
+                   r{\'{e}}flexions sur des th{\`{e}}mes comme le
+                   m{\'{e}}tier de sociologue, illusions et
+                   connaissance, structure et individu{\ldots} Sans que
+                   soient mises en cause...},
+  doi =           {10.1007/s13398-014-0173-7.2},
+  isbn =          {9781783281930},
+  issn =          {1271-6669},
+}
+

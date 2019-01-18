@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "*"
+numpy = "*"
+matplotlib = "*"
+pandas = "*"
+pillow = "*"
+torchvision = "*"
+torch = "*"
+gpytorch = "*"
+scipy = "*"
+"netcdf4" = "*"
+scikit-learn = "*"
+"mpi4py" = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
