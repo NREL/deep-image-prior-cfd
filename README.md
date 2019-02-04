@@ -44,7 +44,7 @@ For the flow around a cylinder:
 @article{HenrydeFrahan19,
     author    = {Henry de Frahan, M. T. and Grout, R.},
     title     = {Data recovery in computational fluid dynamics through deep image priors},
-    journal   = {arXiv:},
+    journal   = {arXiv:1901.11113},
     year      = {2019}
 }
 ```
