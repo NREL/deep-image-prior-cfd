@@ -1,8 +1,10 @@
-\documentclass[review,onefignum,onetabnum]{siamonline181217}
+\documentclass[review]{elsarticle}
 
 % Packages and macros go here
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{algorithmic}
@@ -13,27 +15,7 @@
 \usepackage{units}
 \usepackage[acronyms]{glossaries}
 
-\ifpdf
-  \DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg}
-\else
-  \DeclareGraphicsExtensions{.eps}
-\fi
-
-% Prevent itemized lists from running into the left margin inside theorems and proofs
-\usepackage{enumitem}
-\setlist[enumerate]{leftmargin=.5in}
-\setlist[itemize]{leftmargin=.5in}
-
-% Add a serial/Oxford comma by default.
-\newcommand{\creflastconjunction}{, and~}
-
-% Used for creating new theorem and remark environments
-\newsiamremark{remark}{Remark}
-\newsiamremark{hypothesis}{Hypothesis}
-\crefname{hypothesis}{Hypothesis}{Hypotheses}
-\newsiamthm{claim}{Claim}
-
-% Sets running headers as well as PDF title and authors
+\journal{Elsevier}
 
 % \title{Data recovery in computational fluid dynamics through deep image priors}
 % \author[main]{M.~T.~Henry de Frahan\corref{cor1}}
@@ -43,34 +25,21 @@
 % \cortext[cor1]{Corresponding author}
 % \address[main]{High Performance Algorithms and Complex Fluids, Computational Science Center, National Renewable Energy Laboratory, 15013 Denver W Pkwy, ESIF301, Golden, CO 80401, USA}
 
-\headers{Data recovery in computational fluid dynamics through deep image priors}{M.~T.~Henry de Frahan, and R.~W.~Grout}
-
-% Title. If the supplement option is on, then "Supplementary Material"
-% is automatically inserted before the title.
-\title{Data recovery in computational fluid dynamics through deep image priors\thanks{Submitted to the editors 01/18/19.
-\funding{This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308.}}}
-
-% Authors: full names plus addresses.
-\author{Marc T. Henry de Frahan\thanks{High Performance Algorithms and Complex Fluids, Computational Science Center, National Renewable Energy Laboratory, 15013 Denver W Pkwy, ESIF301, Golden, CO 80401, USA (\email{marc.henrydefrahan@nrel.gov}, \email{ray.grout@nrel.gov}).}
-\and Ray W. Grout\footnotemark[2]}
-
-\usepackage{amsopn}
-\DeclareMathOperator{\diag}{diag}
-
-
-%=================================================================================
-% FundRef data to be entered by SIAM
-%<funding-group specific-use="FundRef">
-%<award-group>
-%<funding-source>
-%<named-content content-type="funder-name"> 
-%</named-content> 
-%<named-content content-type="funder-identifier"> 
-%</named-content>
-%</funding-source>
-%<award-id> </award-id>
-%</award-group>
-%</funding-group>
+%% `Elsevier LaTeX' style
+%\bibliographystyle{elsarticle-num}
+\bibliographystyle{elsarticle-num-names}
+\makeatletter
+\providecommand{\doi}[1]{%
+  \begingroup
+  \let\bibinfo\@secondoftwo
+  \urlstyle{rm}%
+  \href{http://dx.doi.org/#1}{%
+    doi:\discretionary{}{}{}%
+    \nolinkurl{#1}%
+  }%
+  \endgroup
+}
+\makeatother
 
 %=================================================================================
 % Abbreviations
@@ -84,8 +53,19 @@
 \glsdisablehyper
 
 \begin{document}
+\begin{frontmatter}
 
-\maketitle
+\title{Data recovery in computational fluid dynamics through deep image priors}
+
+\author[main]{M.~T.~Henry de Frahan\corref{cor1}}
+\ead{marc.henrydefrahan@nrel.gov}
+
+\author[main]{R.~W.~Grout}
+\ead{ray.grout@nrel.gov}
+
+\cortext[cor1]{Corresponding author}
+
+\address[main]{High Performance Algorithms and Complex Fluids, Computational Science Center, National Renewable Energy Laboratory, 15013 Denver W Pkwy, ESIF301, Golden, CO 80401, USA}
 
 \begin{abstract}
 
@@ -121,16 +101,12 @@
 \end{abstract}
 
 \begin{keyword}
-data recovery, fault tolerance, Gaussian process regression, deep convolutional neural network, computational fluid dynamics
+data recovery \sep fault tolerance \sep Gaussian process regression \sep deep convolutional neural network \sep computational fluid dynamics
 \end{keyword}
 
-\begin{AMS}
-  60G15, 62M45, 68U10, 76F05, 76D17
-\end{AMS}
+\end{frontmatter}
 
 \glsresetall
-
-\linenumbers
 
 \section{Introduction}
 As modern computational efforts reach exascale, hardware and software
@@ -222,17 +198,17 @@ the method to new configurations. As illustrated in this work, the
 method proposed here is not specific to the flow configuration and
 does not require multiple training data samples.
 
-This paper is organized as follows. In \cref{sec:formulation}, we
+This paper is organized as follows. In Section\,\ref{sec:formulation}, we
 present the problem formulation and define the objective function for
-the data recovery problem. In \cref{sec:nn}, we detail the
+the data recovery problem. In Section\,\ref{sec:nn}, we detail the
 architecture of the deep convolutional neural network used to perform
-the data recovery process for fluid flows. In \cref{sec:results}, we
+the data recovery process for fluid flows. In Section\,\ref{sec:results}, we
 present our results by evaluating the neural network's ability to
 perform data recovery for two canonical flows: laminar flow past a
-cylinder, \cref{sec:cylinder}, and homogeneous isotropic turbulence,
-\cref{sec:hit}. These results are compared with data recovery
+cylinder, Section\,\ref{sec:cylinder}, and homogeneous isotropic turbulence,
+Section\,\ref{sec:hit}. These results are compared with data recovery
 performed through \gls{gpr}. Finally, conclusions and future work are
-presented in \cref{sec:ccl}.
+presented in Section\,\ref{sec:ccl}.
 
 \section{Problem formulation}\label{sec:formulation}
 
@@ -607,7 +583,7 @@ This work was authored by the National Renewable Energy Laboratory, operated by 
 
 This research was supported by the Exascale Computing Project (ECP), Project Number: 17-SC-20-SC, a collaborative effort of two DOE organizations -- the Office of Science and the National Nuclear Security Administration -- responsible for the planning and preparation of a capable exascale ecosystem -- including software, applications, hardware, advanced system engineering, and early testbed platforms -- to support the nation's exascale computing imperative.
 
-\bibliographystyle{siamplain}
+\section*{References}
 \bibliography{library}
 
 \end{document}

@@ -1,0 +1,400 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+%\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+
+%=================================================================================
+% Document information
+\def\firstname{Marc}
+\def\familyname{Henry de Frahan}
+\def\FileAuthor{\firstname~\familyname}
+\def\FileTitle{ParCFD 2017}
+\def\FileSubject{ParCFD 2017}
+\def\FileKeyWords{\firstname~\familyname, \FileSubject, \FileTitle}
+
+%=================================================================================
+% Preamble
+\input{preamble.tex}
+
+\title[]{}
+\author[Marc T. Henry de Frahan]{Marc T. Henry de Frahan}
+\date{\today}
+
+\begin{document}
+\presentation
+
+%=================================================================================
+% Title page
+\bgroup
+\setbeamertemplate{background}{\begin{tikzpicture}\node at (0,0){};\node[inner sep=0,opacity=1]{\includegraphics[width=1\paperwidth,height=1\paperheight]{./figs/ecp_title_4x3.jpg}};\end{tikzpicture}}
+\frame[plain]{
+  \hspace*{0.cm}\begin{minipage}{1\textwidth}
+    \vspace*{-0.7cm}                                      
+    \textbf{\textcolor{black}{\LARGE Data Reconstruction for\vphantom{p}}}\\
+    \textbf{\textcolor{black}{\LARGE Computational Fluid Dynamics}}\\
+    \textbf{\textcolor{black}{\LARGE using Deep Neural Networks}}\par
+    \vspace*{2.cm}
+    \textbf{\textcolor{black}{\large \mbox{M. T. Henry de Frahan$^\text{a}$}, R. King$^\text{b}$, and R. Grout$^\text{a}$}}\\[0.1cm]
+    \textbf{\textcolor{black}{\footnotesize February 27, 2019}}\\
+    \textit{\scriptsize\textcolor{black}{$^\text{a}$High Performance Algorithms and Complex Fluids, NREL}}\\[-0.1cm]
+    \textit{\scriptsize\textcolor{black}{$^\text{b}$Complex Systems Simulation and Optimization Group, NREL}}\\[0.2cm]
+  \end{minipage}
+  % \begin{textblock*}{\paperwidth}[0,0](0.\paperwidth,0.25\paperheight)
+  %   \includegraphics[width=\paperwidth]{./figs/wallhump_white.png}
+  % \end{textblock*}
+  \setcounter{framenumber}{0}
+  \begin{textblock*}{4.cm}[1,1](0.39\paperwidth,.91\paperheight)
+    \includegraphics[width=1\textwidth]{./figs/logos/nrel.jpg}
+  \end{textblock*}
+  }
+\egroup
+
+% Everyone has the same background
+\bgroup
+\setbeamertemplate{background}{\begin{tikzpicture}\node at (0,0){};\node[inner sep=0,opacity=1]{\includegraphics[width=1\paperwidth,height=1\paperheight]{./figs/ecp_main_4x3.jpg}};\end{tikzpicture}}
+
+% ================================================================================
+% Motivation/objective
+\frame{
+  \frametitle{As computing reaches exascale, hardware and software faults will incur data loss.}
+
+  \structure{Data recovery will become ever more important}\\
+  \hspace*{1cm}\mbox{current checkpoint paradigm is expensive (I/O and resimulation)}\\
+  \hspace*{1cm}increase simulation resilience to faults\\[0.5cm]  
+  
+  \structure{Assumption:} fault has been detected by an appropriate framework\\[0.5cm]
+
+  \structure{We seek a method to recover the lost data that}\\
+  \hspace*{1cm}is agnostic to the simulation configuration and geometry\\
+  \hspace*{1cm}does not require extensive training data\\
+  \hspace*{1cm}is accurate for very different physics\\[0.5cm]
+
+  \textbf{We focus here on computational fluid dynamics applications.}
+}
+
+\frame{
+  \frametitle{Can we use new deep learning techniques to recover data in computational fluid dynamics?}
+  \structure{Computational fluid dynamics}\\
+  \hspace*{1cm}Gappy POD {\tiny(\cite{Everson1995,Tan2003,Venturi2004})}\\
+  \hspace*{1cm}Gaussian process regression {\tiny(\cite{Gunes2006})}\\
+  \hspace*{1cm}Resimulation, gap-tooth algorithm {\tiny(\cite{Lee2015, Lee2017})}\\[0.2cm]
+  \structure{Inpainting in deep learning}\\
+  \hspace*{1cm}Convolutional neural networks {\tiny(\cite{Goodfellow2014,Burger2012}}\\
+  \hspace*{1cm}{\tiny\cite{Dosovitskiy2015,Lefkimmiatis2016,Ledig2017,Tai2017,Lai2017})}\\
+  \hspace*{1cm}Generative adversarial neural networks {\tiny(\cite{Yeh2016}}\\
+  \hspace*{1cm}{\tiny(\cite{Denton2016,Pathak2016,Li2017a,Sasaki2017})}\\[0.2cm]
+  \structure{Drawbacks of current methods}\\
+  \hspace*{1cm}require extensive training data sets\\
+  \hspace*{1cm}reloading of previous data (difficult in exascale context)\\
+  \hspace*{1cm}eigenmode decompositions\\
+  \hspace*{1cm}specific to certain configurations
+}
+
+% ================================================================================
+% Methods
+\frame{
+  \frametitle{Deep image priors for inpainting does not require a large training data set (Ulyanov et al, 2017).}
+  \structure{Image reconstruction} optimization problem
+  \begin{align*}
+    \setlength{\fboxsep}{4pt}
+    \min_x{\highlight[c2med!70]{E(x;x_0)} + R(x)}
+  \end{align*}
+  $x$ is the target image\\
+  $x_0$ is the corrupted image\\[0.3cm]
+  $\setlength{\fboxsep}{4pt}\highlight[c2med!70]{E(x;x_0)}$ is the task-dependent data term, for inpainting:
+  \begin{align*}
+    E(x;x_0) = || (x-x_0) \circ m||^2
+  \end{align*}
+}
+\frame{
+  \frametitle{Deep image priors for inpainting does not require a large training data set (Ulyanov et al, 2017).}
+  \begin{align*}
+    \setlength{\fboxsep}{4pt}
+    \min_x{E(x;x_0) + \highlight[c3med!70]{R(x)}}
+  \end{align*}
+  $\setlength{\fboxsep}{4pt}\highlight[c3med!70]{R(x)}$ is the image prior (regularizer).\\
+  \hspace*{1cm}can be a functional with desirable characteristics\\
+  \hspace*{1cm}tuned for a configuration represented by the training data\\[0.3cm]
+  Ulyanov et al.\,suggest replacing with parametrization such that
+  \begin{align*}
+    \min_\theta{E(f_\theta(z); x_0)} \label{equ:loss}
+  \end{align*}
+  $f$ represents the convolutional neural network\\
+  $\theta$ are the model parameters (initialized randomly)\\
+  $z$ is a \textit{fixed} input\\[0.3cm]
+  \textbf{Network learns encoding necessary to map input to output}
+}
+
+\frame{
+  \frametitle{Convolutional neural network uses an encoder-decoder structure.}
+  Encodes input into latent space\\
+  Decodes the latent space into the reconstructed image\\
+  \begin{figure}[!tbp]%
+    \centering%
+    \includegraphics[width=\textwidth]{../../paper/figs/encoder_decoder.pdf}%
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Convolutional neural network uses an encoder-decoder structure.}
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[b]{0.33\textwidth}%
+      \includegraphics[width=0.92\textwidth]{../../paper/figs/downsample.pdf}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[b]{0.33\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/upsample.pdf}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[b]{0.15\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/legend.pdf}%
+      \vspace*{0.4cm}%
+    \end{subfigure}%
+  \end{figure}%
+  \structure{Neural network details and implementation}\\
+  \hspace*{1cm}Leaky ReLU non-linear activation functions\\
+  \hspace*{1cm}Downsampling performed through striding\\
+  \hspace*{1cm}Upsampling done with nearest-neighbor upsampling\\
+  \hspace*{1cm}Fixed number of filters (128) in each layer, kernel size of 3\\
+  \hspace*{1cm}Adam optimization, 2000 iteration (loss decrease by 1000x)\\
+  \hspace*{1cm}PyTorch implementation, training on Tesla V100 GPU
+}
+
+\frame{
+  \frametitle{Demonstration of the reconstruction procedure.}
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics[width=\textwidth]{../../figs/image0.png}%
+      \caption*{Original.}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics[width=\textwidth]{../../figs/masked0.png}%
+      \caption*{Deteriorated.}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics<1>[width=\textwidth]{./figs/input.png}%
+      \includegraphics<2>[width=\textwidth]{./figs/iteration00000.png}%
+      \includegraphics<3>[width=\textwidth]{./figs/iteration00050.png}%
+      \includegraphics<4>[width=\textwidth]{./figs/iteration00100.png}%
+      \includegraphics<5>[width=\textwidth]{./figs/iteration00300.png}%
+      \includegraphics<6>[width=\textwidth]{./figs/iteration02000.png}%
+      \only<1>{\caption*{Input.}}%
+      \only<2>{\caption*{Epoch 1.}}%
+      \only<3>{\caption*{Epoch 50.}}%
+      \only<4>{\caption*{Epoch 100.}}%
+      \only<5>{\caption*{Epoch 300.}}%
+      \only<6>{\caption*{Epoch 2000.}}%
+    \end{subfigure}%
+  \end{figure}%
+}
+
+\frame{
+  \frametitle{Gaussian process regression is used for comparisons of data recovery problems.}
+  \structure{Gaussian process regression}\\
+  \hspace*{1cm}commonly used for this task in geophysics (Kriging)\\
+  \hspace*{1cm}kernel based probabilistic model (Bayesian method)\\
+  \hspace*{1cm}computes a posterior distribution over models\\
+  \hspace*{1cm}provides model uncertainty\\
+  \hspace*{1cm}$\mathcal{O}(n^3)$ scaling with the number of training samples\\[0.3cm]
+  \structure{For the results presented here}\\
+  \hspace*{1cm}\mbox{training points from a region surrounding the deteriorated pixels}\\
+  \hspace*{1cm}radial basis function GP kernel\\
+  \hspace*{1cm}using GP algorithm in Scikit-Learn library\\[0.3cm]
+  \structure{\mbox{Other methods (interpolation, etc) were attempted with little success}}
+}
+
+% ================================================================================
+% Results
+
+% Cylinder
+\frame{
+  \frametitle{Data recovery for laminar flow around a cylinder.}
+  \vspace*{0.3cm}
+  \structure{Simulation setup}\\
+  \hspace*{1cm}laminar flow around bluff body ($Re = 200$)\\
+  \hspace*{1cm}Nalu-Wind, a low Mach Navier-Stokes solver using Trilinos
+  \hspace*{1cm}$t=234\unit{s}$ snapshot for data recovery (fully developed flow)\\[0.2cm]
+  \structure{Recovery study}\\
+  \hspace*{1cm}square masks located at 40 random downstream locations\\
+  \hspace*{1cm}various mask sizes, $L_m \in [0.5D, 5D]$
+  \begin{figure}[!tbp]%
+    \centering%
+    \includegraphics<1>[width=0.8\textwidth]{../../paper/figs/cyl_umag0.png}%
+    \includegraphics<2>[width=0.8\textwidth]{../../paper/figs/cyl_umag0_masked.png}%
+  \end{figure}%
+}
+
+\frame{
+  \frametitle{Results indicate that the CNN recovers the flow accurately for modest mask sizes ($L_m=2D$).}
+  \vspace*{0.3cm}
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[t]{0.45\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/cyl_umag0.png}%
+      \caption*{Original data.}\label{fig:cyl_umag0}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.45\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/cyl_umag0_masked.png}%
+      \caption*{Deteriorated data.}\label{fig:cyl_umag0_masked}%
+    \end{subfigure}\\%
+    \begin{subfigure}[t]{0.45\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/cyl_umagr.png}%
+      \caption*{CNN.}\label{fig:cyl_umagr}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.45\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/cyl_umagi.png}%
+      \caption*{GPR.}\label{fig:cyl_umagi}%
+    \end{subfigure}%
+  \end{figure}%
+}
+
+\frame{
+  \frametitle{CNN does not significantly outperform GPR over a range of mask sizes for this laminar flow.}
+  \vspace*{0.3cm}
+  \begin{align*}
+    L_2(u) = \sqrt{\frac{1}{N} \sum_i (u(i) - u_r(i))^2}
+  \end{align*}
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{../../paper/figs/cyl_error_u.png}};
+        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+          \draw (0.8, 0.6) node[font=\scriptsize] {\textcolor{c1brt}{CNN}};
+          \draw (0.8, 0.78) node[font=\scriptsize] {\textcolor{c2brt}{GPR}};
+        \end{scope}
+      \end{tikzpicture}
+      \caption*{$x$-direction velocity.}\label{fig:cyl_error_u}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/cyl_error_v.png}%
+      \caption*{$y$-direction velocity.}\label{fig:cyl_error_v}%
+    \end{subfigure}%
+  \end{figure}%
+}
+
+% HIT
+\frame{
+  \frametitle{Data recovery for homogeneous isotropic turbulence.}
+  \vspace*{0.3cm}
+  \structure{Simulation setup}\\
+  \hspace*{1cm}homogeneous isotropic turbulence ($Re_\lambda = 133$)\\
+  \hspace*{1cm}PeleC, a compressible Navier-Stokes solver using AMReX\\[0.2cm]
+  \structure{Recovery study}\\
+  \hspace*{1cm}total percentage of missing data, $f \in [6.25\%, 25\%]$\\
+  \hspace*{1cm}mask sizes: $L_m \in [0.03125L, 0.5L]$ or $[0.74\lambda, 11.87\lambda]$\\[0.1cm]
+  \begin{figure}[!tbp]%
+    \centering%
+    \includegraphics<1>[width=0.5\textwidth]{../../paper/figs/umag0.png}%
+    \includegraphics<2>[width=0.5\textwidth]{../../paper/figs/umag0_masked.png}%
+  \end{figure}%
+  \begin{textblock*}{2.cm}(0.75\paperwidth,.7\paperheight)%
+    \only<2>{$f=25\%$\\
+      $L_m = 1.5\lambda$}
+  \end{textblock*}%
+}
+
+\frame{
+  \frametitle{Example of data recovery for homogeneous isotropic turbulence using deep image priors.}
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/umag0.png}%
+      \caption*{Original.}\label{fig:original}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/umag0_masked.png}%
+      \caption*{Deteriorated.}\label{fig:masked}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.32\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/umagr.png}%
+      \caption*{Recovered.}\label{fig:result}%
+    \end{subfigure}%
+  \end{figure}%
+  We performed 1300 data recovery tasks using a variety of masks.
+}
+
+\frame{
+  \frametitle{Turbulent energy spectra are used to quantify the reconstruction. CNN recovers the correct energy spectra.} 
+  \begin{figure}[!tbp]%
+    \centering%
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{../../paper/figs/spectra.png}};
+        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+          \draw (0.4, 0.78) node[right, font=\scriptsize] {\textcolor{c1brt}{Original} \& \textcolor{c2brt}{CNN}};
+          \draw (0.4, 0.65) node[font=\scriptsize] {\textcolor{c3brt}{GPR}};
+        \end{scope}
+      \end{tikzpicture}
+      \caption*{Average energy spectrum.}\label{fig:spectra}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/error_spectra.png}%
+      \caption*{Normalized error, $e_{E_k} = \frac{|E^h_k - E_k|}{E_k}$.}\label{fig:error_spectra}%
+    \end{subfigure}%
+  \end{figure}%
+  \structure{Results indicate that}\\
+  \hspace*{1cm}CNN can represent the wide range of scales\\
+  \hspace*{1cm}GPR under/overpredicts the intermediate/small scales
+}
+
+\frame{
+  \frametitle{Recovered data is used in forward simulations of decay of homogeneous isotropic turbulence in PeleC.}
+  \begin{figure}[!tbp]%
+    \centering%
+    Normalized enstrophy ($25\%$ of the original data is missing) 
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/enstrophy_result.png}%
+      \caption*{CNN.}\label{fig:enstrophy_dl}%
+    \end{subfigure}%
+    \hfill%
+    \begin{subfigure}[t]{0.48\textwidth}%
+      \includegraphics[width=\textwidth]{../../paper/figs/enstrophy_interp.png}%
+      \caption*{GPR.}\label{fig:enstrophy_gp}%
+    \end{subfigure}%
+    \caption*{Solid black: original data;
+      \textcolor{c1brt}{solid red:} $L_m=0.74\lambda$;
+      \textcolor{c2brt}{dashed green}: $L_m=1.48\lambda$;
+      \textcolor{c3brt}{dot-dashed blue}: $L_m=2.97\lambda$;
+      \textcolor{c4brt}{dotted orange}: $L_m=5.94\lambda$;
+      \textcolor{c5brt}{dot-dot-dashed purple}:
+      $L_m=11.87\lambda$.}\label{fig:hit_enstrophy}%
+  \end{figure}%
+}
+
+% ================================================================================
+% Conclusions
+\frame{
+  \frametitle{We used deep convolutional neural networks for data recovery in computational fluid dynamics.}
+  \structure{We demonstrated a method to recover the lost data that}\\
+  \hspace*{1cm}is agnostic to the simulation configuration and geometry\\
+  \hspace*{1cm}does not require extensive training data\\
+  \hspace*{1cm}is accurate for very different physics\\[0.4cm]
+  \structure{We successfully recovered data from different CFD flows}\\
+  \hspace*{1cm}laminar flow around a cylinder (wake recovery)\\
+  \hspace*{1cm}homogeneous isotropic turbulence (spectra recovery)\\[0.4cm]
+  \structure{\mbox{Public repo: \url{https://github.com/NREL/deep-image-prior-cfd}}}\\
+  \structure{Full paper: \url{http://arxiv.org/abs/1901.11113}}\\[0.4cm]
+  {\tiny\textit{This research was supported by the Exascale Computing Project (ECP), Project Number: 17-SC-20-SC, a collaborative effort of two DOE organizations -- the Office of Science and the National Nuclear Security Administration -- responsible for the planning and preparation of a capable exascale ecosystem -- including software, applications, hardware, advanced system engineering, and early testbed platforms -- to support the nation's exascale computing imperative.}\par}
+}
+
+% =================================================================================
+% Bibliography
+\begin{frame}[allowframebreaks,plain]{Bibliography}
+  \tiny
+  \bibliographystyle{model1-num-names}
+  %\bibliographystyle{jap}
+  \bibliography{../../paper/library}
+\end{frame}
+
+\egroup
+
+\end{document}
