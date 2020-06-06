@@ -128,7 +128,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--flow",
         dest="flow",
-        help="Flow to be inpainted (turbulence | demo | cylinder)",
+        help="Flow to be inpainted (turbulence | demo | cylinder | pipeflow)",
         type=str,
         default="turbulence",
     )
@@ -206,6 +206,25 @@ if __name__ == "__main__":
                 "mbox": row.mbox,
             }
             cnt += 1
+    # Pipeflow
+    elif args.flow == "pipeflow":
+        nimages = 147
+        root = os.path.abspath("pipeflow")
+        rdir = os.path.join(root, "results")
+        imgdir = os.path.join(root, "images")
+        maskdir = os.path.join(root, "masks")
+        fname = "pf*.{0:s}".format(args.ext)
+        imgnames = glob.glob(os.path.join(imgdir, fname))[:nimages]
+        log = pd.read_csv(os.path.join(maskdir, "log.dat"))
+        for imgname in imgnames:
+            masks = log.sample(frac=1.0).groupby(by=["fraction", "nprocs"]).first()
+            for index, row in masks.iterrows():
+                cases["case{0:06d}".format(cnt)] = {
+                    "imgname": imgname,
+                    "maskname": os.path.join(maskdir, row.filename),
+                    "mbox": row.mbox,
+                }
+                cnt += 1
 
     # ========================================================================
     # Loop on all cases
